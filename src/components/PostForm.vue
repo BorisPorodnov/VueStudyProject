@@ -1,27 +1,51 @@
 <template>
-    <form @submit.prevent>
-      <h4>Создание поста</h4>
-      <input v-bind:value="title"
-             @input="title = $event.target.value"
-             class="input"
-             type="text"
-             placeholder="Название поста"
+  <form @submit.prevent>
+    <h4>Создание поста</h4>
+    <my-input
+        v-model="post.title"
+        type="text"
+        placeholder="Название"
+    >
+    </my-input>
+      <my-input
+          v-model="post.body"
+          type="text"
+          placeholder="Описание"
       >
-      <input v-bind:value="body"
-             @input="body = $event.target.value"
-             class="input"
-             type="text"
-             placeholder="Описание поста"
+      </my-input>
+      <my-button
+          @click="createPost"
+          style= "align-self: flex-end; margin-top: 15px"
       >
-      <button
-          class="my-button"
-      > Cоздать
-      </button>
-    </form>
+        Cоздать
+      </my-button>
+  </form>
 </template>
 
 <script>
+
+import MyInput from "@/components/UI/MyInput";
+
 export default {
+  components: {MyInput},
+  data() {
+    return {
+      post: {
+        title: '',
+        body: ''
+      }
+    }
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit('create', this.post)
+      this.post = {
+        title: '',
+        body: ''
+      }
+    }
+  }
 
 }
 </script>
@@ -30,22 +54,5 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-}
-
-
-
-.input {
-  width: 100%;
-  padding: 10px 15px;
-  border: 3px solid cyan;
-  margin-top: 15px;
-}
-
-.my-button {
-  border: 2px solid cyan;
-  background: none;
-  padding: 10px 15px;
-  margin-top: 15px;
-  align-self: flex-end;
 }
 </style>

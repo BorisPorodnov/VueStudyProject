@@ -1,29 +1,35 @@
 <template>
-  <div>
-
-    <div class="post" v-for="post in posts">
-      <div><strong>Название:</strong> {{ post.title }}</div>
-      <div><strong>Описание:</strong> {{ post.body }}</div>
-    </div>
+  <div v-show="posts.length > 0">
+    <h3>Cписок пользователей</h3>
+    <post-item
+        v-for="post in posts"
+        :post="post"
+        :key="post.id"
+        @remove="$emit('remove',post)"
+    >
+    </post-item>
   </div>
+  <h2 v-show="posts.length === 0  " style="color: red">
+    Список постов пуст
+  </h2>
 </template>
 
 <script>
-export default {
+import PostItem from "@/components/PostItem";
 
-  props:{
-    posts:{
+export default {
+  components: {
+    PostItem
+  },
+  props: {
+    posts: {
       type: Array,
-      required:true
+      required: true
     }
   }
 }
 </script>
 
 <style scoped>
-.post {
-  margin: 15px;
-  padding: 15px;
-  border: 3px solid cyan;
-}
+
 </style>
