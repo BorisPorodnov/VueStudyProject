@@ -7,18 +7,18 @@
         placeholder="Название"
     >
     </my-input>
-      <my-input
-          v-model="post.body"
-          type="text"
-          placeholder="Описание"
-      >
-      </my-input>
-      <my-button
-          @click="createPost"
-          style= "align-self: flex-end; margin-top: 15px"
-      >
-        Cоздать
-      </my-button>
+    <my-input
+        v-model="post.body"
+        type="text"
+        placeholder="Описание"
+    >
+    </my-input>
+    <my-button
+        @click="createPost"
+        style="align-self: flex-end; margin-top: 15px"
+    >
+      Cоздать
+    </my-button>
   </form>
 </template>
 
@@ -46,7 +46,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
